@@ -55,7 +55,6 @@ const VenueCard: React.FC<VenueCardProps> = ({ venue }) => {
       </div>
 
 
-      {/* Body */}
       <div className="flex flex-1 flex-col gap-2 p-4">
         <h3 className="text-base font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
           {venue.name}
@@ -173,6 +172,7 @@ export default function Home() {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
               <li><Link href="/">Home</Link></li>
               <li><Link href="/history-booking">History Booking</Link></li>
+              <li><Link href="/favorite-booking">Favorite Booking</Link></li>
             </ul>
           </div>
           <a className="btn btn-ghost text-xl">ayola.id</a>
@@ -181,6 +181,7 @@ export default function Home() {
           <ul className="menu menu-horizontal px-1">
             <li><Link href="/">Home</Link></li>
             <li><Link href="/history-booking">History Booking</Link></li>
+            <li><Link href="/favorite-booking">Favorite Booking</Link></li>
           </ul>
         </div>
         <div className="navbar-end">
