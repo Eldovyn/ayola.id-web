@@ -31,36 +31,36 @@ export default function PageLogin() {
             </div>
 
             <div className="flex-1 flex flex-col justify-center bg-[#EEF1F7]">
-                <h1 className="text-3xl font-semibold ms-40">Create account</h1>
-                <div className="flex flex-row ms-40 gap-10">
-                    <div className="border-2 flex items-center w-60 justify-center rounded-md p-2 mt-8 gap-2 bg-white">
-                        <Image
-                            src={IconGoogle}
-                            alt="logo-trenalyze"
-                            width={25}
-                            height={25}
-                            priority
-                        />
-                        Sign up with Google
-                    </div>
-                    <div className="border-2 flex items-center w-60 justify-center rounded-md p-2 mt-8 gap-2 bg-white">
-                        <Image
-                            src={IconFacebook}
-                            alt="logo-trenalyze"
-                            width={25}
-                            height={25}
-                            priority
-                            className="rounded-sm"
-                        />
-                        Sign up with Facebook
-                    </div>
-                </div>
-                <div className="ms-40 me-40 mt-8 flex items-center gap-4">
-                    <Separator className="flex-1" />
-                    <span className="text-sm text-muted-foreground">or</span>
-                    <Separator className="flex-1" />
-                </div>
                 <form action="" className="w-full mx-auto mt-8 flex flex-col gap-4">
+                    <h1 className="text-3xl font-semibold ms-40 me-40">Create account</h1>
+                    <div className="flex flex-row gap-10 ms-40 me-40">
+                        <div className="border-2 flex items-center w-60 justify-center rounded-md p-2 mt-8 gap-2 bg-white">
+                            <Image
+                                src={IconGoogle}
+                                alt="logo-trenalyze"
+                                width={25}
+                                height={25}
+                                priority
+                            />
+                            Sign up with Google
+                        </div>
+                        <div className="border-2 flex items-center w-60 justify-center rounded-md p-2 mt-8 gap-2 bg-white">
+                            <Image
+                                src={IconFacebook}
+                                alt="logo-trenalyze"
+                                width={25}
+                                height={25}
+                                priority
+                                className="rounded-sm"
+                            />
+                            Sign up with Facebook
+                        </div>
+                    </div>
+                    <div className="ms-40 me-40 flex items-center gap-4">
+                        <Separator className="flex-1" />
+                        <span className="text-sm text-muted-foreground">or</span>
+                        <Separator className="flex-1" />
+                    </div>
                     <div className="relative flex items-center border rounded-md h-12 mx-auto p-2 bg-white border-[#D9D9D9] w-130">
                         <FaUser
                             aria-hidden
