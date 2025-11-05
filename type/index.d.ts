@@ -77,6 +77,6 @@ declare interface ApiResponse {
         [field: string]: string[];
     };
     token?: {
-        [field: string]: string[];
+        [field: string]: string;
     };
 }
