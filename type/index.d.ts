@@ -41,3 +41,36 @@ declare interface Place {
     numberOfCourts?: number;
     pricePerHour?: number;
 };
+
+declare interface RegitserInput {
+    username: string;
+    email: string;
+    password: string;
+    confirm_password: string;
+    provider: string;
+};
+
+declare interface ErrorResponse {
+    message: string;
+    errors?: {
+        [field: string]: string[];
+    };
+    data?: {
+        [field: string]: string[];
+    };
+    token?: {
+        [field: string]: string[];
+    };
+}
+
+declare interface ApiResponse {
+    data?: Token | User;
+    message: string;
+    user: User;
+    errors?: {
+        [field: string]: string[];
+    };
+    token?: {
+        [field: string]: string[];
+    };
+}
