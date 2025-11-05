@@ -39,11 +39,16 @@ export default function PageLogin() {
         onSuccess: async (data) => {
             const res = data.data as ApiResponse;
             toast.success(res.message);
-            Cookies.set('accessToken', res.data.access_token);
-            if (res.data.role === 'user') {
-                push('/');
+            const accessToken = res.token?.access_token;
+            if (accessToken) {
+                Cookies.set("token", accessToken);
+                if (res.data.role === 'user') {
+                    push('/');
+                } else {
+                    push('/dashboard');
+                }
             } else {
-                push('/dashboard');
+                toast.error('failed sign in');
             }
         },
     });
