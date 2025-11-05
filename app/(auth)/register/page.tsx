@@ -12,6 +12,7 @@ import { IoEyeOffOutline } from "react-icons/io5";
 import { IoMdLock } from "react-icons/io";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function PageLogin() {
     const [showPassword, setShowPassword] = useState(false);
@@ -137,6 +138,7 @@ export default function PageLogin() {
                     <Button className="w-130 h-12 mx-auto bg-blue-500 hover:bg-blue-600 cursor-pointer">
                         Sign Up
                     </Button>
+                    <p className="text-sm text-[#374151] ms-40">Already have an account? <span><Link href="/login" className="text-blue-500 hover:underline">Sign In</Link></span></p>
                 </form>
             </div>
         </div>
