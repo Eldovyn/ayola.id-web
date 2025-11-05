@@ -159,7 +159,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex flex-col gap-10 h-screen w-full">
+      <div className="flex flex-col gap-10 h-screen w-full pt-10">
         <div className="flex justify-end items-start w-full pt-20 pe-8">
           <div className="relative w-72">
             <Input type="search" placeholder="Search" className="pr-10" />
