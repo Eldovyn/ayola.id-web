@@ -100,7 +100,7 @@ export default function PageLogin() {
                             required
                             className="pr-10 outline-none placeholder-[#374151] ps-9.5 pb-[3px] text-black flex-1 border-0 shadow-none focus-visible:ring-0"
                         />
-                        {showConfirmPassword ? (
+                        {showPassword ? (
                             <IoEyeOutline
                                 className="absolute right-3 h-5 w-5 text-gray-500 cursor-pointer"
                                 onClick={() => setShowPassword(!showPassword)}
