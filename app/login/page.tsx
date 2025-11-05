@@ -7,8 +7,8 @@ const PageLogin = () => {
     return (
         <>
             <div className="h-screen flex justify-center items-center bg-[#EEF2F5]">
-                <div className="bg-[#FFFFFF] w-150 h-150 rounded-lg flex flex-col gap-2 justify-center">
-                    <h1 className="text-3xl font-bold text-center">Welcome Back To Chaty</h1>
+                <div className="bg-[#FFFFFF] w-150 pt-10 pb-10 rounded-lg flex flex-col gap-2 justify-center">
+                    <h1 className="text-3xl font-bold text-center">Welcome Back To Ayolan.id</h1>
                     <p className="ps-20 pe-20 text-gray-500 text-sm text-center -mt-2">Sign in to your account</p>
                     <form action="" className="pt-15 flex gap-5 flex-col">
                         <div className="flex flex-col gap-2 ms-20 me-20 ">
