@@ -1,6 +1,14 @@
 import { Input } from "@/components/ui/input";
 import { IoSearchOutline } from "react-icons/io5";
 import Image from "next/image";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 
 interface Venue {
   id: string;
@@ -63,13 +71,23 @@ const VenueCard: React.FC<VenueCardProps> = ({ venue }) => {
 
 
         <div className="mt-auto flex items-center justify-between pt-2">
-          <button
-            type="button"
-            className="inline-flex items-center justify-center rounded-xl px-3.5 py-2 text-sm font-medium text-white shadow-sm ring-1 ring-black/5 transition-all duration-200 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/60 active:scale-[0.98] bg-indigo-600 hover:bg-indigo-500"
-            aria-label={`Booking ${venue.name}`}
-          >
-            Booking
-          </button>
+          <Dialog>
+            <DialogTrigger
+              type="button"
+              className="inline-flex items-center justify-center rounded-xl px-3.5 py-2 text-sm font-medium text-white shadow-sm ring-1 ring-black/5 transition-all duration-200 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/60 active:scale-[0.98] bg-indigo-600 hover:bg-indigo-500"
+              aria-label={`Booking ${venue.name}`}
+            >
+              Booking
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>{`Booking ${venue.name}`}</DialogTitle>
+                <DialogDescription>
+                  {venue.description}
+                </DialogDescription>
+              </DialogHeader>
+            </DialogContent>
+          </Dialog>
           <button
             type="button"
             className="rounded-full p-2 text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-700 focus:outline-none dark:hover:bg-zinc-800"
