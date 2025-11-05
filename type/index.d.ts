@@ -32,3 +32,12 @@ declare interface DatePickerProps {
     setMonth: Dispatch<SetStateAction<Date | undefined>>;
     setValue: Dispatch<SetStateAction<string>>;
 }
+
+declare interface Place {
+    id: string;
+    name: string;
+    description?: string;
+    image?: string;
+    numberOfCourts?: number;
+    pricePerHour?: number;
+};
