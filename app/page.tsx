@@ -1,3 +1,4 @@
+'use client'
 import { Input } from "@/components/ui/input";
 import { IoSearchOutline } from "react-icons/io5";
 import Image from "next/image";
@@ -9,18 +10,22 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-
-interface Venue {
-  id: string;
-  name: string;
-  image: string;
-  description: string;
-  price: number;
-}
-
-interface VenueCardProps {
-  venue: Venue;
-}
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+import { Label } from "@/components/ui/label"
+import { Calendar } from "@/components/ui/calendar"
+import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { CalendarIcon } from "lucide-react"
+import { Venue, VenueCardProps, DatePickerProps } from "@/type";
+import {
+  ToggleGroup,
+  ToggleGroupItem,
+} from "@/components/ui/toggle-group"
+import { LuClock } from "react-icons/lu";
 
 function formatIDR(value: number): string {
   return new Intl.NumberFormat("id-ID", {
@@ -30,7 +35,137 @@ function formatIDR(value: number): string {
   }).format(value);
 }
 
+function formatDate(date: Date | undefined) {
+  if (!date) {
+    return ""
+  }
+
+  return date.toLocaleDateString("en-US", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  })
+}
+
+function isValidDate(date: Date | undefined) {
+  if (!date) {
+    return false
+  }
+  return !isNaN(date.getTime())
+}
+
+function ToggleGroupSpacing() {
+  const SLOTS = [
+    "7 AM - 8 AM",
+    "8 AM - 9 AM",
+    "9 AM - 10 AM",
+    "10 AM - 11 AM",
+    "11 AM - 12 PM",
+    "12 PM - 1 PM",
+    "1 PM - 2 PM",
+    "2 PM - 3 PM",
+    "4 PM - 5 PM",
+  ] as const;
+
+  const [value, setValue] = useState<string[]>([]);
+
+  return (
+    <ToggleGroup
+      type="multiple"
+      variant="outline"
+      size="sm"
+      value={value}
+      onValueChange={setValue}
+      spacing={2}
+      className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2"
+    >
+      {SLOTS.map((slot) => (
+        <ToggleGroupItem
+          key={slot}
+          value={slot}
+          aria-label={`Select ${slot}`}
+          className="w-full justify-start data-[state=on]:bg-transparent data-[state=on]:*:[svg]:fill-blue-500 data-[state=on]:*:[svg]:stroke-blue-500"
+        >
+          <LuClock className="mr-1" />
+          {slot}
+        </ToggleGroupItem>
+      ))}
+    </ToggleGroup>
+  );
+}
+
+function Calendar28(p: DatePickerProps) {
+  const { open, setOpen, date, setDate, month, setMonth, value, setValue } = p
+
+  return (
+    <div className="flex flex-col gap-3">
+      <Label htmlFor="date" className="px-1">
+        Booking Date
+      </Label>
+      <div className="relative flex gap-2">
+        <Input
+          id="date"
+          value={value}
+          placeholder="June 01, 2025"
+          className="bg-background pr-10"
+          onChange={(e) => {
+            const date = new Date(e.target.value)
+            setValue(e.target.value)
+            if (isValidDate(date)) {
+              setDate(date)
+              setMonth(date)
+            }
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "ArrowDown") {
+              e.preventDefault()
+              setOpen(true)
+            }
+          }}
+        />
+        <Popover open={open} onOpenChange={setOpen}>
+          <PopoverTrigger asChild>
+            <Button
+              id="date-picker"
+              variant="ghost"
+              className="absolute top-1/2 right-2 size-6 -translate-y-1/2"
+            >
+              <CalendarIcon className="size-3.5" />
+              <span className="sr-only">Select date</span>
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent
+            className="w-auto overflow-hidden p-0"
+            align="end"
+            alignOffset={-8}
+            sideOffset={10}
+          >
+            <Calendar
+              mode="single"
+              selected={date}
+              captionLayout="dropdown"
+              month={month}
+              onMonthChange={setMonth}
+              onSelect={(date) => {
+                setDate(date)
+                setValue(formatDate(date))
+                setOpen(false)
+              }}
+            />
+          </PopoverContent>
+        </Popover>
+      </div>
+    </div>
+  )
+}
+
 const VenueCard: React.FC<VenueCardProps> = ({ venue }) => {
+  const [open, setOpen] = useState(false)
+  const [date, setDate] = useState<Date | undefined>(
+    new Date("2025-06-01")
+  )
+  const [month, setMonth] = useState<Date | undefined>(date)
+  const [value, setValue] = useState(formatDate(date))
   return (
     <article
       className="group relative flex flex-col overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg dark:border-zinc-800 dark:bg-zinc-900"
@@ -79,13 +214,27 @@ const VenueCard: React.FC<VenueCardProps> = ({ venue }) => {
             >
               Booking
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className="max-w-none! w-[38vw]!">
               <DialogHeader>
                 <DialogTitle>{`Booking ${venue.name}`}</DialogTitle>
                 <DialogDescription>
                   {venue.description}
                 </DialogDescription>
               </DialogHeader>
+              <Image src={venue.image} alt={venue.name} width={400} height={400} className="w-full aspect-video object-cover rounded-md" />
+              <Calendar28 open={open}
+                setOpen={setOpen}
+                date={date}
+                setDate={setDate}
+                month={month}
+                setMonth={setMonth}
+                value={value}
+                setValue={setValue} />
+              <Label htmlFor="date" className="px-1">
+                Select Time
+              </Label>
+              <ToggleGroupSpacing />
+              <Button className="w-full bg-blue-500 hover:bg-blue-600 cursor-pointer">Booking</Button>
             </DialogContent>
           </Dialog>
           <button
