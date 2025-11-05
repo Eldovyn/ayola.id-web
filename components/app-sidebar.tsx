@@ -10,6 +10,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import { FaBagShopping } from "react-icons/fa6";
 
 const items = [
     {
@@ -21,6 +22,11 @@ const items = [
         title: "List Court",
         url: "/dashboard/list-court",
         icon: RiFileListFill,
+    },
+    {
+        title: "Booking List",
+        url: "/dashboard/booking-list",
+        icon: FaBagShopping,
     },
 ]
 
