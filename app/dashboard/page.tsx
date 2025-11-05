@@ -16,10 +16,6 @@ const DashboardPage = () => {
                     <Input type="text" placeholder="Image URL" className="bg-white" />
                 </div>
                 <div className="flex flex-col gap-2">
-                    <Label htmlFor="numberOfCourts">Number Of Courts</Label>
-                    <Input type="number" placeholder="Number" className="bg-white" />
-                </div>
-                <div className="flex flex-col gap-2">
                     <Label htmlFor="price">Price /Jam</Label>
                     <Input type="number" placeholder="Price" className="bg-white" />
                 </div>
