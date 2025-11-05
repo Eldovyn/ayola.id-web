@@ -50,6 +50,12 @@ declare interface RegitserInput {
     provider: string;
 };
 
+declare interface LoginInput {
+    email: string;
+    password: string;
+    provider: string;
+};
+
 declare interface ErrorResponse {
     message: string;
     errors?: {
