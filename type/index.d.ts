@@ -10,6 +10,15 @@ declare interface Venue {
 
 declare interface VenueCardProps {
     venue: Venue;
+    open: boolean;
+    date?: Date;
+    month?: Date;
+    value: string;
+
+    setOpen: Dispatch<SetStateAction<boolean>>;
+    setDate: Dispatch<SetStateAction<Date | undefined>>;
+    setMonth: Dispatch<SetStateAction<Date | undefined>>;
+    setValue: Dispatch<SetStateAction<string>>;
 }
 
 declare interface DatePickerProps {

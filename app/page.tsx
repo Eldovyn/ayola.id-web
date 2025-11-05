@@ -94,9 +94,7 @@ function ToggleGroupSpacing() {
   );
 }
 
-function Calendar28(p: DatePickerProps) {
-  const { open, setOpen, date, setDate, month, setMonth, value, setValue } = p
-
+const Calendar28: React.FC<DatePickerProps> = ({ open, date, month, value, setOpen, setDate, setMonth, setValue }) => {
   return (
     <div className="flex flex-col gap-3">
       <Label htmlFor="date" className="px-1">
@@ -159,13 +157,7 @@ function Calendar28(p: DatePickerProps) {
   )
 }
 
-const VenueCard: React.FC<VenueCardProps> = ({ venue }) => {
-  const [open, setOpen] = useState(false)
-  const [date, setDate] = useState<Date | undefined>(
-    new Date("2025-06-01")
-  )
-  const [month, setMonth] = useState<Date | undefined>(date)
-  const [value, setValue] = useState(formatDate(date))
+const VenueCard: React.FC<VenueCardProps> = ({ venue, open, date, month, value, setOpen, setDate, setMonth, setValue }) => {
   return (
     <article
       className="group relative flex flex-col overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg dark:border-zinc-800 dark:bg-zinc-900"
@@ -265,6 +257,13 @@ const VenueCard: React.FC<VenueCardProps> = ({ venue }) => {
 
 
 export default function Home() {
+  const [open, setOpen] = useState(false)
+  const [date, setDate] = useState<Date | undefined>(
+    new Date("2025-06-01")
+  )
+  const [month, setMonth] = useState<Date | undefined>(date)
+  const [value, setValue] = useState(formatDate(date))
+
   const badmintonVenues: Venue[] = [
     {
       id: "bv-01",
@@ -339,7 +338,7 @@ export default function Home() {
         </div>
         <section className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ps-8 pe-8">
           {badmintonVenues.map((v) => (
-            <VenueCard key={v.id} venue={v} />
+            <VenueCard key={v.id} venue={v} open={open} date={date} month={month} value={value} setOpen={setOpen} setDate={setDate} setMonth={setMonth} setValue={setValue} />
           ))}
         </section>
         <br />
