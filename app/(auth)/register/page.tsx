@@ -35,7 +35,7 @@ export default function PageLogin() {
                 <form action="" className="w-full mx-auto mt-8 flex flex-col gap-4">
                     <h1 className="text-3xl font-semibold ms-40 me-40">Create account</h1>
                     <div className="flex flex-row gap-10 ms-40 me-40">
-                        <div className="border-2 flex items-center w-60 justify-center rounded-md p-2 mt-8 gap-2 bg-white">
+                        <div className="border-2 flex items-center w-60 justify-center rounded-md p-2 mt-8 gap-2 bg-white cursor-pointer">
                             <Image
                                 src={IconGoogle}
                                 alt="logo-trenalyze"
@@ -45,7 +45,7 @@ export default function PageLogin() {
                             />
                             Sign up with Google
                         </div>
-                        <div className="border-2 flex items-center w-60 justify-center rounded-md p-2 mt-8 gap-2 bg-white">
+                        <div className="border-2 flex items-center w-60 justify-center rounded-md p-2 mt-8 gap-2 bg-white cursor-pointer">
                             <Image
                                 src={IconFacebook}
                                 alt="logo-trenalyze"
