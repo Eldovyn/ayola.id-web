@@ -4,17 +4,31 @@ import { useUserMe } from "@/services/user/user-me";
 import Cookies from "js-cookie";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { useRouter } from "next/navigation";
+import {
+    Menubar,
+    MenubarContent,
+    MenubarItem,
+    MenubarMenu,
+    MenubarSeparator,
+    MenubarTrigger,
+} from "@/components/ui/menubar"
 
 const NavBar = () => {
     const accessToken = Cookies.get("accessToken");
 
     const { data: dataUserMe, isSuccess: isSuccessUserMe } = useUserMe(accessToken || "");
 
-    const { push } = useRouter();
+    const { push, refresh, replace } = useRouter();
 
     const handleLogin = () => {
         push("/login");
     }
+
+    const handleLogout = () => {
+        Cookies.remove("accessToken");
+        replace("/");
+        refresh();
+    };
 
     return (
         <>
@@ -47,10 +61,23 @@ const NavBar = () => {
                     </div>
                 ) : (
                     <div className="navbar-end">
-                        <Avatar>
-                            <AvatarImage src={dataUserMe?.data?.avatar} />
-                            <AvatarFallback>CN</AvatarFallback>
-                        </Avatar>
+                        <Menubar className="border-0 shadow-none bg-white">
+                            <MenubarMenu>
+                                <MenubarTrigger className="cursor-pointer">
+                                    <Avatar>
+                                        <AvatarImage src={dataUserMe?.data?.avatar} />
+                                        <AvatarFallback>CN</AvatarFallback>
+                                    </Avatar>
+                                </MenubarTrigger>
+                                <MenubarContent>
+                                    <MenubarItem className="cursor-pointer">
+                                        {dataUserMe?.data?.email}
+                                    </MenubarItem>
+                                    <MenubarSeparator />
+                                    <MenubarItem onClick={handleLogout} className="cursor-pointer">Sign out</MenubarItem>
+                                </MenubarContent>
+                            </MenubarMenu>
+                        </Menubar>
                     </div>
                 )}
             </nav>
