@@ -27,8 +27,9 @@ export async function middleware(request: NextRequest) {
     if (pathname === "/") {
         const data = await getUserMe(accessToken || "");
         if (!data) {
-            request.cookies.delete("accessToken");
-            return NextResponse.redirect(new URL("/login", request.url));
+            const resp = NextResponse.next();
+            resp.cookies.delete("accessToken");
+            return resp;
         }
         if (data.data.data.role === 'admin') {
             return NextResponse.redirect(new URL("/dashboard", request.url));
@@ -39,7 +40,7 @@ export async function middleware(request: NextRequest) {
         const data = await getUserMe(accessToken || "");
         if (!data) {
             request.cookies.delete("accessToken");
-            return NextResponse.redirect(new URL("/login", request.url));
+            return NextResponse.redirect(new URL("/", request.url));
         }
         if (data.data.data.role === 'user') {
             return NextResponse.redirect(new URL("/", request.url));

@@ -30,11 +30,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ClientNavGate />
         <ReactQueryProvider>
+          <ClientNavGate />
           {children}
+          <Toaster />
         </ReactQueryProvider>
-        <Toaster />
       </body>
     </html>
   );

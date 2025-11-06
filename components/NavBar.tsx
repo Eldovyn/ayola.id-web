@@ -1,10 +1,19 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button"
+import { useUserMe } from "@/services/user/user-me";
+import Cookies from "js-cookie";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 const NavBar = () => {
+    const accessToken = Cookies.get("accessToken");
+
+    const { data: dataUserMe, isSuccess: isSuccessUserMe } = useUserMe(accessToken || "");
+
+    console.log(dataUserMe);
+
     return (
         <>
-            <nav className="navbar bg-base-100 shadow-sm fixed top-0 left-0 z-50">
+            <nav className="navbar bg-white shadow-sm fixed top-0 left-0 z-50">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -12,7 +21,7 @@ const NavBar = () => {
                         </div>
                         <ul
                             tabIndex={-1}
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                            className="menu menu-sm dropdown-content bg-white rounded-box z-1 mt-3 w-52 p-2 shadow">
                             <li><Link href="/">Home</Link></li>
                             <li><Link href="/history-booking">History Booking</Link></li>
                             <li><Link href="/favorite-booking">Favorite Booking</Link></li>
@@ -27,9 +36,18 @@ const NavBar = () => {
                         <li><Link href="/favorite-booking">Favorite Booking</Link></li>
                     </ul>
                 </div>
-                <div className="navbar-end">
-                    <Button variant="outline" className="bg-blue-500 text-white hover:bg-blue-500 hover:text-white cursor-pointer">Sign In</Button>
-                </div>
+                {!isSuccessUserMe ? (
+                    <div className="navbar-end">
+                        <Button variant="outline" className="bg-blue-500 text-white hover:bg-blue-500 hover:text-white cursor-pointer">Sign In</Button>
+                    </div>
+                ) : (
+                    <div className="navbar-end">
+                        <Avatar>
+                            <AvatarImage src={dataUserMe?.data?.avatar} />
+                            <AvatarFallback>CN</AvatarFallback>
+                        </Avatar>
+                    </div>
+                )}
             </nav>
         </>
     )
