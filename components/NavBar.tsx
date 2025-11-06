@@ -3,13 +3,18 @@ import { Button } from "@/components/ui/button"
 import { useUserMe } from "@/services/user/user-me";
 import Cookies from "js-cookie";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { useRouter } from "next/navigation";
 
 const NavBar = () => {
     const accessToken = Cookies.get("accessToken");
 
     const { data: dataUserMe, isSuccess: isSuccessUserMe } = useUserMe(accessToken || "");
 
-    console.log(dataUserMe);
+    const { push } = useRouter();
+
+    const handleLogin = () => {
+        push("/login");
+    }
 
     return (
         <>
@@ -38,7 +43,7 @@ const NavBar = () => {
                 </div>
                 {!isSuccessUserMe ? (
                     <div className="navbar-end">
-                        <Button variant="outline" className="bg-blue-500 text-white hover:bg-blue-500 hover:text-white cursor-pointer">Sign In</Button>
+                        <Button variant="outline" onClick={handleLogin} className="bg-blue-500 text-white hover:bg-blue-500 hover:text-white cursor-pointer">Sign In</Button>
                     </div>
                 ) : (
                     <div className="navbar-end">
