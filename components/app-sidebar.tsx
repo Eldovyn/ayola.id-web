@@ -1,3 +1,4 @@
+'use client'
 import { IoMdAddCircle } from "react-icons/io";
 import { RiFileListFill } from "react-icons/ri";
 import {
@@ -9,8 +10,12 @@ import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
+    SidebarFooter
 } from "@/components/ui/sidebar"
 import { FaBagShopping } from "react-icons/fa6";
+import { IoExit } from "react-icons/io5";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 const items = [
     {
@@ -31,6 +36,13 @@ const items = [
 ]
 
 export function AppSidebar() {
+    const { push } = useRouter();
+
+    const handleLogout = () => {
+        Cookies.remove("accessToken");
+        push("/login");
+    };
+
     return (
         <Sidebar>
             <SidebarContent>
@@ -54,6 +66,12 @@ export function AppSidebar() {
                     </SidebarGroupContent>
                 </SidebarGroup>
             </SidebarContent>
+            <SidebarFooter>
+                <div className="flex flex-row gap-7 items-center text-xl cursor-pointer" onClick={handleLogout}>
+                    <IoExit />
+                    <p>Sign Out</p>
+                </div>
+            </SidebarFooter>
         </Sidebar>
     )
 }
