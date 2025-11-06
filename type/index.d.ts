@@ -56,6 +56,13 @@ declare interface LoginInput {
     provider: string;
 };
 
+declare interface AddCourtInput {
+    name: string;
+    image_url: string;
+    description: string;
+    price: number;
+};
+
 declare interface ErrorResponse {
     message: string;
     errors?: {
