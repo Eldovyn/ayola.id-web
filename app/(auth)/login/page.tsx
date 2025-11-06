@@ -41,7 +41,7 @@ export default function PageLogin() {
             toast.success(res.message);
             const accessToken = res.token?.access_token;
             if (accessToken) {
-                Cookies.set("token", accessToken);
+                Cookies.set("accessToken", accessToken);
                 if (res.data.role === 'user') {
                     push('/');
                 } else {
