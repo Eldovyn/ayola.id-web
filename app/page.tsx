@@ -47,13 +47,6 @@ function formatDate(date: Date | undefined) {
   })
 }
 
-function isValidDate(date: Date | undefined) {
-  if (!date) {
-    return false
-  }
-  return !isNaN(date.getTime())
-}
-
 function ToggleGroupSpacing() {
   const SLOTS = [
     "7 AM - 8 AM",
@@ -107,12 +100,10 @@ const Calendar28: React.FC<DatePickerProps> = ({ open, date, month, value, setOp
           placeholder="June 01, 2025"
           className="bg-background pr-10"
           onChange={(e) => {
-            const date = new Date(e.target.value)
-            setValue(e.target.value)
-            if (isValidDate(date)) {
-              setDate(date)
-              setMonth(date)
-            }
+            setValue(e.target.value);
+            const dt = e.target.valueAsDate;
+            setDate(dt ?? new Date());
+            setMonth(dt ? new Date(dt.getFullYear(), dt.getMonth(), 1) : new Date());
           }}
           onKeyDown={(e) => {
             if (e.key === "ArrowDown") {
@@ -261,6 +252,8 @@ export default function Home() {
   const [date, setDate] = useState<Date | undefined>(new Date())
   const [month, setMonth] = useState<Date | undefined>(date)
   const [value, setValue] = useState(formatDate(date))
+
+  console.log(value);
 
   const badmintonVenues: Venue[] = [
     {

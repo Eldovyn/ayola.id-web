@@ -33,13 +33,15 @@ declare interface DatePickerProps {
     setValue: Dispatch<SetStateAction<string>>;
 }
 
-declare interface Place {
+declare interface Court {
+    created_at: string;
+    deleted_at: string;
+    description: string;
     id: string;
+    image_url: string;
     name: string;
-    description?: string;
-    image?: string;
-    numberOfCourts?: number;
-    pricePerHour?: number;
+    price: number;
+    updated_at: string;
 };
 
 declare interface RegitserInput {
@@ -61,6 +63,16 @@ declare interface AddCourtInput {
     image_url: string;
     description: string;
     price: number;
+    opening: string;
+    session_1: boolean;
+    session_2: boolean;
+    session_3: boolean;
+    session_4: boolean;
+    session_5: boolean;
+    session_6: boolean;
+    session_7: boolean;
+    session_8: boolean;
+    session_9: boolean;
 };
 
 declare interface ErrorResponse {
@@ -87,3 +99,41 @@ declare interface ApiResponse {
         [field: string]: string;
     };
 }
+
+declare interface Link {
+    next: number | null;
+    prev: number | null;
+}
+
+declare interface Page {
+    current_page: number;
+    has_next: boolean;
+    has_prev: boolean;
+    per_page: number;
+    total_items: number;
+    total_pages: number;
+}
+
+declare interface ApiGetCourtsResponse {
+    data: Court[];
+    link: Link;
+    message: string | null;
+    page: Page
+}
+
+declare type SessionsForm = {
+    session_1: boolean;
+    session_2: boolean;
+    session_3: boolean;
+    session_4: boolean;
+    session_5: boolean;
+    session_6: boolean;
+    session_7: boolean;
+    session_8: boolean;
+    session_9: boolean;
+};
+
+declare type Props = {
+    values: SessionsForm;
+    setFieldValue: (field: string, value: string | number | boolean, shouldValidate?: boolean) => void;
+};
