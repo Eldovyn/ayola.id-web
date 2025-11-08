@@ -1,15 +1,7 @@
 import type { Dispatch, SetStateAction } from "react";
 
-declare interface Venue {
-    id: string;
-    name: string;
-    image: string;
-    description: string;
-    price: number;
-}
-
-declare interface VenueCardProps {
-    venue: Venue;
+declare interface CourtCardProps {
+    court: Court;
     open: boolean;
     date?: Date;
     month?: Date;
@@ -42,6 +34,15 @@ declare interface Court {
     name: string;
     price: number;
     updated_at: string;
+    session_1: boolean;
+    session_2: boolean;
+    session_3: boolean;
+    session_4: boolean;
+    session_5: boolean;
+    session_6: boolean;
+    session_7: boolean;
+    session_8: boolean;
+    session_9: boolean;
 };
 
 declare interface RegitserInput {
@@ -137,3 +138,21 @@ declare type Props = {
     values: SessionsForm;
     setFieldValue: (field: string, value: string | number | boolean, shouldValidate?: boolean) => void;
 };
+
+declare interface CourtProps {
+    court: Court;
+}
+
+declare type CourtWithSessions = Court & {
+    session_1: boolean;
+    session_2: boolean;
+    session_3: boolean;
+    session_4: boolean;
+    session_5: boolean;
+    session_6: boolean;
+    session_7: boolean;
+    session_8: boolean;
+    session_9: boolean;
+};
+
+declare type CourtProps = { court: CourtWithSessions };
